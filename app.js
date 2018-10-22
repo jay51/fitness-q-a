@@ -1,18 +1,24 @@
 "use strict";
 const express = require("express");
 const bodyParser = require("body-parser");
+const mongoose = require("mongoose");
 
 // import routes
 const questions = require("./routes/index");
 
 const app = express();
-
 app.set("view engine", "pug");
 app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.urlencoded({ extended: false }));
+mongoose.connect(
+	"mongodb://mongo:27017/fitness",
+	{ useNewUrlParser: true }
+);
 
+// routes
 app.use("/", questions);
 
+// error handler
 app.use(function(req, res, next) {
 	const error = new Error("Page Not Found");
 	error.status = 404;
