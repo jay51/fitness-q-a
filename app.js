@@ -10,8 +10,10 @@ const app = express();
 app.set("view engine", "pug");
 app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.urlencoded({ extended: false }));
+// app.use(bodyParser.json()); // for json body for postman test
+
 mongoose.connect(
-	"mongodb://mongo:27017/fitness",
+	"mongodb://localhost:27017/fitness",
 	{ useNewUrlParser: true }
 );
 

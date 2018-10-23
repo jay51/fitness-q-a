@@ -5,15 +5,25 @@ const Schema = mongoose.Schema;
 const questionsSchema = new Schema({
 	question: String,
 	description: String,
-	votes: Number,
+	votes: { tyep: Number, default: 0 },
 	date: { type: Date, default: Date().now },
+	// a question will have ref to answers
+	answers: [
+		{
+			type: Schema.Types.ObjectId,
+			ref: "Answers"
+		}
+	],
+	// a question will have author to check for ownership
 	author: {
 		username: String,
 		id: {
-			type: userID,
-			ref: "user collection"
+			type: Schema.Types.ObjectId,
+			ref: "Users"
 		}
 	}
 });
 
-module.exports = mongoose.model("Question", questionsSchema);
+// sort answers| later
+
+module.exports = mongoose.model("Questions", questionsSchema);
