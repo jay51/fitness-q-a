@@ -15,3 +15,16 @@
 [] implement methodOverride
 [] Add AUTH
 [] Loged out users can see questions
+
+## REST ROUTE for questions METHOD
+
+questions GET
+questions/:qID GET
+questions/:qID DELETE
+questions/:qID PUT
+
+## ROUTE for questions METHOD
+
+questions/:qID/answers POST
+questions/:qID/answers DELETE
+questions/:qID/answers PUT
