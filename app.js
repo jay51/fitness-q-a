@@ -2,11 +2,14 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+const morgan = require("morgan");
 
 // import routes
 const questions = require("./routes/index");
+const answers = require("./routes/answers");
 
 const app = express();
+app.use(morgan("dev"));
 app.set("view engine", "pug");
 app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -18,6 +21,7 @@ mongoose.connect(
 );
 
 // routes
+app.use("/questions/:qID", answers);
 app.use("/", questions);
 
 // error handler
