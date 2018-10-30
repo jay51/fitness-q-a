@@ -1,7 +1,7 @@
 // answers routes should fall down here!
 const express = require("express");
 const Answer = require("../models/answers");
-// const ans = require("../models/questions");
+const Question = require("../models/questions");
 const router = express.Router({ mergeParams: true });
 
 // router.param("qID", function(req, res, next, id) {
@@ -19,16 +19,28 @@ const router = express.Router({ mergeParams: true });
 
 router.post("/answers", function(req, res, next) {
 	//add answer to a question
-	console.log("Post answer to question: ", req.params.qID);
+	Question.findById(req.params.qID, function(err, question) {
+		Answer.create(req.body, function(err, answer) {
+			answer.save();
+			question.answers.push(answer);
+			question.save();
+		});
+	});
 
 	res.json({
 		question: req.params.qID
 	});
 });
 
-// router.delete("/questions/qID", function(req, res) {
-// delete question whit that qID
-// });
+router.delete("/answers/:aID", function(req, res) {
+	// delete answer whit that aID
+	// this will delete the answer but questions will still have the id for a deleted question
+	Answer.findOneAndDelete({ _id: req.params.aID }, function(err, answer) {
+		res.json({
+			answer
+		});
+	});
+});
 
 // router.put("/questions/qID", function(req, res) {
 // edit question whit that qID

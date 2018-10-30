@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 const answersSchema = new Schema({
 	answer: String,
-	votes: Number,
+	votes: { type: Number, default: 0 },
 	// all users that vote on answer will be added to voters to limit user to 1 vote
 	voters: [
 		{

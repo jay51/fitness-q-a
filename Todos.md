@@ -4,6 +4,7 @@
 [X] Connect DB
 [X] Designe DB
 [] Create helper methods to handle voting maybe a method to handle timeupdating when user edit question
+[] Create view Templates
 1.[] Create users
 2.[] Create questions
 3.[] Edit questions

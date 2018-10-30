@@ -1,6 +1,5 @@
 const express = require("express");
 const Question = require("../models/questions");
-// const ans = require("../models/questions");
 const router = express.Router();
 
 router.param("qID", function(req, res, next, id) {
@@ -35,11 +34,16 @@ router.post("/questions", function(req, res, next) {
 	});
 });
 
-router.delete("/questions/qID", function(req, res) {
+router.delete("/questions/:qID", function(req, res) {
 	// delete question whit that qID
+	Question.findOneAndDelete({ _id: req.params.qID }, function(err, question) {
+		res.json({
+			question
+		});
+	});
 });
 
-router.put("/questions/qID", function(req, res) {
+router.put("/questions/:qID", function(req, res) {
 	// edit question whit that qID
 });
 
