@@ -23,6 +23,14 @@ const answersSchema = new Schema({
 	}
 });
 
+// Remove answer ref from answers arry in question before deleting answer
+answersSchema.pre("remove", function(next) {
+	console.log("answer's ID: ", this._id);
+
+	this.model("Questions").find({ _id: this._id });
+	next();
+});
+
 // increamant votes on vote
 answersSchema.method("vote", function(vote, callback) {
 	if (vote === "up") {
