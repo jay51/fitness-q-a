@@ -23,11 +23,20 @@ const answersSchema = new Schema({
 	}
 });
 
-// Remove answer ref from answers arry in question before deleting answer
-answersSchema.pre("remove", function(next) {
-	console.log("answer's ID: ", this._id);
+// Remove answer ref from answers arr in question before deleting answer
+// this is document middleware
+// answersSchema.pre("remove", function(next) {
+// 	console.log("answer's ID: ", this._id);
 
-	this.model("Questions").find({ _id: this._id });
+// 	this.model("Questions").find({ _id: this._id });
+// 	next();
+// });
+
+// this is document middleware
+answersSchema.pre("remove", { query: true }, function(next) {
+	console.log("answer's ID: ", this.schema);
+
+	// this.model("Questions").find({ _id: this._id });
 	next();
 });
 

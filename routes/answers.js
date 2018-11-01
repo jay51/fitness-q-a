@@ -21,8 +21,8 @@ router.post("/answers", function(req, res, next) {
 	//add answer to a question
 	Question.findById(req.params.qID, function(err, question) {
 		Answer.create(req.body, function(err, answer) {
-			answer.save();
 			question.answers.push(answer);
+			answer.save();
 			question.save();
 		});
 	});
@@ -34,10 +34,22 @@ router.post("/answers", function(req, res, next) {
 
 router.delete("/answers/:aID", function(req, res) {
 	// delete answer whit that aID
+
 	// this will delete the answer but questions will still have the id for a deleted question
-	Answer.findOneAndDelete({ _id: req.params.aID }, function(err, answer) {
+	// Answer.findById({ _id: req.params.aID }, function(err, answer) {
+	// 	console.log("delete this answer: ", answer);
+	// 	answer.remove();
+
+	// 	res.json({
+	// 		answer
+	// 	});
+	// });
+
+	Answer.remove({ _id: req.params.aID }, function(err) {
+		// console.log("delete this answer: ", answer);
+
 		res.json({
-			answer
+			// answer
 		});
 	});
 });
