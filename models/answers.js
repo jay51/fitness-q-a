@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const Questions = require("./questions");
 
 const Schema = mongoose.Schema;
 
@@ -24,21 +25,16 @@ const answersSchema = new Schema({
 });
 
 // Remove answer ref from answers arr in question before deleting answer
-// this is document middleware
-// answersSchema.pre("remove", function(next) {
-// 	console.log("answer's ID: ", this._id);
+// answersSchema.pre("findOneAndDelete", { query: true }, function(next) {
+// console.log("pre was called, ID: ", this._id);
 
-// 	this.model("Questions").find({ _id: this._id });
-// 	next();
+// this.model("Questions").find({_id: })
+// Questions.findById(this._id, function(err, questionn) {
+// 	console.log("questionn: ", questionn);
 // });
 
-// this is document middleware
-answersSchema.pre("remove", { query: true }, function(next) {
-	console.log("answer's ID: ", this.schema);
-
-	// this.model("Questions").find({ _id: this._id });
-	next();
-});
+// next();
+// });
 
 // increamant votes on vote
 answersSchema.method("vote", function(vote, callback) {

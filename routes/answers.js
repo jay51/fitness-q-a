@@ -34,22 +34,21 @@ router.post("/answers", function(req, res, next) {
 
 router.delete("/answers/:aID", function(req, res) {
 	// delete answer whit that aID
-
 	// this will delete the answer but questions will still have the id for a deleted question
-	// Answer.findById({ _id: req.params.aID }, function(err, answer) {
-	// 	console.log("delete this answer: ", answer);
-	// 	answer.remove();
 
-	// 	res.json({
-	// 		answer
-	// 	});
-	// });
+	// extract this to a static or doc method
+	Answer.findOneAndDelete({ _id: req.params.aID }, function(err, answer) {
+		console.log("answer to remove", answer);
 
-	Answer.remove({ _id: req.params.aID }, function(err) {
-		// console.log("delete this answer: ", answer);
+		Question.findById(req.params.qID, function(err, question) {
+			console.log("question: ", question);
+			question.answers.remove(req.params.aID);
+			console.log("question: ", question);
+			question.save();
+		});
 
 		res.json({
-			// answer
+			answer
 		});
 	});
 });
