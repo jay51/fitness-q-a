@@ -32,34 +32,31 @@ router.post("/answers", function(req, res, next) {
 	});
 });
 
-router.delete("/answers/:aID", function(req, res) {
-	// delete answer whit that aID
-	// this will delete the answer but questions will still have the id for a deleted question
+router.delete("/answers/:aID", function(req, res, next) {
+	// delete answer with that aID and remove from question
 
-	// extract this to a static or doc method
 	Answer.findOneAndDelete({ _id: req.params.aID }, function(err, answer) {
-		console.log("answer to remove", answer);
-
-		Question.findById(req.params.qID, function(err, question) {
-			console.log("question: ", question);
-			question.answers.remove(req.params.aID);
-			console.log("question: ", question);
-			question.save();
-		});
-
-		res.json({
-			answer
-		});
+		// if you pass null or falsy value to next() then Express will run down the middlewar
+		// if you pass Error or truthy value to next() then Express will jump to the Error handler
+		if (!answer || err) {
+			const error = new Error("Something went wrong!");
+			error.status = 400;
+			next(error);
+		} else {
+			answer.deleteAnswerId(req.params.qID);
+			res.json({
+				answer
+			});
+		}
 	});
 });
 
-// router.put("/questions/qID", function(req, res) {
-// edit question whit that qID
-// });
+router.put("/answers/:aID", function(req, res) {
+	// edit question with qID
 
-// router.get("/questions/:qID", function(req, res, next) {
-// if (req.question) return res.json(req.question);
-// else return next(new Error("Not Found").status(404));
-// });
+	Answer.findByIdAndUpdate(req.params.aID, req.body, function(err, answer) {
+		res.json(answer);
+	});
+});
 
 module.exports = router;

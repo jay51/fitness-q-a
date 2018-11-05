@@ -29,3 +29,15 @@ questions/:qID PUT
 questions/:qID/answers POST
 questions/:qID/answers DELETE
 questions/:qID/answers PUT
+questions/:qID/:vote-up answers POST
+questions/:qID/:vote-down answers POST
+
+<!-- just Some ideas -->
+
+Make a express applecations for asking questions
+use cooke/session auth for authintication
+create users and question and comment DB relationship
+Use pug for the server side view engine
+Use client-session or express-session
+Build error handler and a page for all errors to display to user, with connect-flash
+Use some of the good security practices such as using Helmet, bcrypt, cross-site-security-forgery

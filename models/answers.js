@@ -46,4 +46,13 @@ answersSchema.method("vote", function(vote, callback) {
 	this.parent().save(callback);
 });
 
+answersSchema.method("deleteAnswerId", function(id, callback) {
+	//becareful of the (this) keyword
+	this.model("Questions").findById(id, (err, question) => {
+		// console.log("Question:", question, "\nanswerID: ", this._id);
+		question.answers.remove(this._id);
+		question.save();
+	});
+});
+
 module.exports = mongoose.model("Answers", answersSchema);

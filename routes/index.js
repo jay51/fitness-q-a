@@ -45,6 +45,9 @@ router.delete("/questions/:qID", function(req, res) {
 
 router.put("/questions/:qID", function(req, res) {
 	// edit question whit that qID
+	Question.findByIdAndUpdate(req.params.qID, req.body, function(err, question) {
+		res.json(question);
+	});
 });
 
 router.get("/questions/:qID", function(req, res, next) {
