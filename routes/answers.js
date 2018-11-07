@@ -1,21 +1,7 @@
-// answers routes should fall down here!
 const express = require("express");
 const Answer = require("../models/answers");
 const Question = require("../models/questions");
 const router = express.Router({ mergeParams: true });
-
-// router.param("qID", function(req, res, next, id) {
-// 	Question.findById(id, function(err, question) {
-// 		if (err) return next(err);
-// 		if (!question) {
-// 			const error = new Error("Not Found");
-// 			error.status = 404;
-// 			return next(error);
-// 		}
-// 		req.question = question;
-// 		return next();
-// 	});
-// });
 
 router.post("/answers", function(req, res, next) {
 	//add answer to a question
@@ -53,10 +39,32 @@ router.delete("/answers/:aID", function(req, res, next) {
 
 router.put("/answers/:aID", function(req, res) {
 	// edit question with qID
-
 	Answer.findByIdAndUpdate(req.params.aID, req.body, function(err, answer) {
 		res.json(answer);
 	});
 });
+
+router.post(
+	"/answers/:aID/vote-:dir",
+	function(req, res, next) {
+		if (req.params.dir.search(/^(up|down)$/) === -1) {
+			const err = new Error("Not Found");
+			err.status = 404;
+			next(err);
+		}
+		next();
+	},
+	function(req, res) {
+		Answer.findById(req.params.aID, function(err, answer) {
+			answer.vote(req.params.dir, function() {
+				console.log(req.params.dir);
+			});
+		});
+
+		res.json({
+			vote: req.params.dir
+		});
+	}
+);
 
 module.exports = router;

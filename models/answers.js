@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const Questions = require("./questions");
 
 const Schema = mongoose.Schema;
 
@@ -24,18 +23,6 @@ const answersSchema = new Schema({
 	}
 });
 
-// Remove answer ref from answers arr in question before deleting answer
-// answersSchema.pre("findOneAndDelete", { query: true }, function(next) {
-// console.log("pre was called, ID: ", this._id);
-
-// this.model("Questions").find({_id: })
-// Questions.findById(this._id, function(err, questionn) {
-// 	console.log("questionn: ", questionn);
-// });
-
-// next();
-// });
-
 // increamant votes on vote
 answersSchema.method("vote", function(vote, callback) {
 	if (vote === "up") {
@@ -43,7 +30,7 @@ answersSchema.method("vote", function(vote, callback) {
 	} else {
 		this.votes -= 1;
 	}
-	this.parent().save(callback);
+	this.save(callback);
 });
 
 answersSchema.method("deleteAnswerId", function(id, callback) {
