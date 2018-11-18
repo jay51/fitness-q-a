@@ -16,11 +16,20 @@ router.param("qID", function(req, res, next, id) {
 });
 
 router.get("/questions", function(req, res, next) {
-	Question.find({}, function(err, questions) {
-		if (err) {
-			return next(err);
-		}
-		res.json(questions);
+	// Question.find({}, function(err, questions) {
+	// 	if (err) {
+	// 		return next(err);
+	// 	}
+	// 	res.json(questions);
+	// });
+
+	// get limited number of questions
+	const queryLimit = 1;
+	const query = Question.find({}, null, { limit: queryLimit });
+	query.exec(function(err, questions) {
+		console.log("One Doc: ", questions);
+		// res.json(question);
+		res.render("index.pug", { questions });
 	});
 });
 

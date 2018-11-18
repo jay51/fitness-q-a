@@ -6,16 +6,13 @@ block content
     .row
       .text-center.w-100
         .col-sm-12
-          .card.m-sm-4.m-2
-            h5.card-title.m-1.mb-0 Whats the name of your pet?
-            .card-body
-              p.card-text my cat was playing and it's so wirred so i just stoped
-              a.card-link.float-left(href="#") Show
-              p.float-left.ml-4 Likes: 45
+          //- Card
+          each question in questions
+            .card
+              .card-header Jack nicksone
+              .card-body
+                h5.card-title #{question.question}
+                p.card-text #{question.description}
+                a.btn.btn-primary(href="/questions/" + question._id) Go To Blog
 
-          .card.m-sm-4.m-2
-            h5.card-title.m-1.mb-0 Whats the name of your pet?
-            .card-body
-              p.card-text my cat was playing and it's so wirred so i just stoped
-              a.card-link.float-left(href="#") Show
-              p.float-left.ml-4 Likes: 45
+
