@@ -21,7 +21,8 @@ mongoose.connect(
 );
 
 // routes
-app.use("/questions/:qID", answers);
+// you would need to put the more spsific routes or middelwares in the top
+// app.use("/questions/:qID", answers);
 app.use("/", questions);
 
 // error handler
@@ -32,7 +33,6 @@ app.use(function(req, res, next) {
 });
 
 app.use(function(err, req, res, next) {
-	console.log(err);
 	res.status(err.status || 500);
 	res.render("error", {
 		message: err.message

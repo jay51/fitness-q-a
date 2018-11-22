@@ -15,16 +15,10 @@ router.param("qID", function(req, res, next, id) {
 	});
 });
 
+// GET /questions
 router.get("/questions", function(req, res, next) {
-	// Question.find({}, function(err, questions) {
-	// 	if (err) {
-	// 		return next(err);
-	// 	}
-	// 	res.json(questions);
-	// });
-
 	// get limited number of questions
-	const queryLimit = 1;
+	const queryLimit = 10;
 	const query = Question.find({}, null, { limit: queryLimit });
 	query.exec(function(err, questions) {
 		console.log("One Doc: ", questions);
@@ -33,7 +27,9 @@ router.get("/questions", function(req, res, next) {
 	});
 });
 
+// POST /questions
 router.post("/questions", function(req, res, next) {
+	console.log(req.body);
 	const question = new Question(req.body);
 	question.save(function(err, questions) {
 		if (err) {
@@ -43,6 +39,12 @@ router.post("/questions", function(req, res, next) {
 	});
 });
 
+// GET /questions/new
+router.get("/questions/new", function(req, res) {
+	res.render("questions/new_question.pug");
+});
+
+// DELETE /questions/:qID
 router.delete("/questions/:qID", function(req, res) {
 	// delete question whit that qID
 	Question.findOneAndDelete({ _id: req.params.qID }, function(err, question) {
@@ -52,6 +54,7 @@ router.delete("/questions/:qID", function(req, res) {
 	});
 });
 
+// PUT /questions/:qID
 router.put("/questions/:qID", function(req, res) {
 	// edit question whit that qID
 	Question.findByIdAndUpdate(req.params.qID, req.body, function(err, question) {
@@ -59,6 +62,7 @@ router.put("/questions/:qID", function(req, res) {
 	});
 });
 
+// GET /questions/:qID
 router.get("/questions/:qID", function(req, res, next) {
 	if (req.question) return res.json(req.question);
 	else return next(new Error("Not Found").status(404));

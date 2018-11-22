@@ -3,8 +3,8 @@
 [X] Connect BootStrap  
 [X] Connect DB
 [X] Designe DB
-[] Create helper methods to handle voting maybe a method to handle timeupdating when user edit question
 [] Create view Templates
+[] Create helper methods to handle voting maybe a method to handle timeupdating when user edit question
 1.[] Create users
 2.[] Create questions
 3.[] Edit questions
@@ -20,6 +20,8 @@
 ## REST ROUTE for questions METHOD
 
 questions GET
+questions POST
+questions/new GET
 questions/:qID GET
 questions/:qID DELETE
 questions/:qID PUT

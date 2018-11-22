@@ -1,0 +1,20 @@
+
+extends ../layout.pug
+
+block content
+  .container
+    .row
+      .text-center.w-100
+        .col-sm-12
+        form(action="/questions", method="POST")
+          .form-group
+            label(for="question") Question
+            input(type="text", class="form-control" , name="question", id="question", placeholder="question?")
+            
+          .form-group
+            lable(for="description") Description
+            textarea(name="description", class="form-control", rows="3")
+          button(type="submit" class="btn btn-primary m-2") Create  
+
+
+
