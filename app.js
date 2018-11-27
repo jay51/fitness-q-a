@@ -7,6 +7,7 @@ const morgan = require("morgan");
 // import routes
 const questions = require("./routes/index");
 const answers = require("./routes/answers");
+const auths = require("./routes/auth");
 
 const app = express();
 app.use(morgan("dev"));
@@ -22,8 +23,9 @@ mongoose.connect(
 
 // routes
 // you would need to put the more spsific routes or middelwares in the top
-// app.use("/questions/:qID", answers);
+app.use("/questions/:qID", answers);
 app.use("/", questions);
+app.use("/", auths);
 
 // error handler
 app.use(function(req, res, next) {

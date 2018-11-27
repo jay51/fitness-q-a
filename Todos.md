@@ -3,8 +3,6 @@
 [X] Connect BootStrap  
 [X] Connect DB
 [X] Designe DB
-[] Create view Templates
-[] Create helper methods to handle voting maybe a method to handle timeupdating when user edit question
 1.[] Create users
 2.[] Create questions
 3.[] Edit questions
@@ -12,7 +10,10 @@
 5.[] Create answers
 6.[] Edit questions
 7.[] Delete answers
+[] check for input (Cross Site Scpripting)
+[] Create view Templates
 [] Make simple POST routes and forms
+[] Create helper methods to handle voting / a method to handle timeupdating when user edit question
 [] implement methodOverride
 [] Add AUTH
 [] Loged out users can see questions

@@ -6,7 +6,7 @@ const questionsSchema = new Schema({
 	question: String,
 	description: String,
 	votes: { tyep: Number, default: 0 },
-	createdAt: { type: Date, default: new Date().toDateString() },
+	createdAt: { type: Date, default: new Date().toLocaleString() },
 	// a question will have ref to answers
 	answers: [
 		{
