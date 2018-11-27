@@ -12,7 +12,7 @@ const answersSchema = new Schema({
 			ref: "Users"
 		}
 	],
-	date: { type: Date, default: Date().now },
+	date: { type: Date, default: new Date().toDateString() },
 	// each answer will have a author to check for answer ownership
 	author: {
 		username: String,
