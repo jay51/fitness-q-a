@@ -1,0 +1,16 @@
+extends ../layout.pug
+
+block content
+  .container
+    .row
+      .col-sm-12
+        form(action="/login", method="POST")
+          .form-group
+            label(for="email") Email address 
+            input.form-control(type="email", name="email", id="email", placeholder="Enter email")
+          .form-group
+            label(for="password") Password
+            input.form-control(type="password" id="password", name="password", placeholder="Password")
+          
+          button.btn.btn-primary(type="submit") Login
+

@@ -1,0 +1,28 @@
+extends ../layout.pug
+
+block content
+  .container
+    .row
+      .col-sm-12
+        form(action="/register", method="POST")
+          .form-group
+            label(for="email") Email address 
+            input.form-control(type="email", name="email", id="email", placeholder="Enter email")
+
+          .form-group
+            label(for="first_name") First Name 
+            input.form-control(type="text", name="first_name", id="first_name", placeholder="First Name")
+          .form-group
+            label(for="last_name") Last Name 
+            input.form-control(type="text", name="last_name", id="last_name", placeholder="Enter Last Name")
+
+          .form-group
+            label(for="password") Password
+            input.form-control(type="password" id="password", name="password", placeholder="Password")
+          
+          .form-group
+            label(for="confirm_password") Confirm Password
+            input.form-control(type="password" id="confirm_password", name="confirm_password", placeholder="Confirm Password")
+          
+          button.btn.btn-primary(type="submit") Login
+
