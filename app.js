@@ -22,7 +22,7 @@ mongoose.connect(
 );
 
 // routes
-// you would need to put the more spsific routes or middelwares in the top
+// you would need to put the more spsific routes or middelwares at the top
 app.use("/questions/:qID", answers);
 app.use("/", questions);
 app.use("/", auths);
