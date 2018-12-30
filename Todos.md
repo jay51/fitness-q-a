@@ -23,6 +23,7 @@
 [] Create helper methods to handle voting / a method to handle timeupdating when user edit question
 [] implement methodOverride
 [] Loged out users can see questions
+[ ] Remove bodyParser because new express comes with bodyParser
 
 ## REST ROUTE for questions METHOD
 

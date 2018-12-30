@@ -23,6 +23,9 @@ router.get("/register", function(req, res) {
 
 // POST /register
 router.post("/register", function(req, res, next) {
+	// create user --Complete
+	// encrypt password --Complete
+	// set the session & redirect to page
 	const { email, first_name, last_name, password, confirm_password } = req.body;
 
 	if (email && first_name && last_name && password && confirm_password) {
@@ -32,31 +35,28 @@ router.post("/register", function(req, res, next) {
 			error.status = 400;
 			return next(error);
 		}
-
 		// Create user
-		User.create(
-			{
+		User.create({
 				email,
 				first_name,
 				last_name,
 				password
-			},
-			function() {
+			}, function(err, user) {
 				// set session and redirect to home page
-			}
-		);
+				if(err) return next(err);
+				req.session.userId = user._id;
+				return res.redirect("/");
+			});
+			
 	} else {
 		const error = new Error("All feilds required!");
 		error.status = 400;
 		return next(error);
 	}
 
-	// encrypt password
-	// create user
-	// set the session & redirect to page
-	res.send(
-		`${email}, ${password}, ${confirm_password}, ${first_name}, ${last_name}`
-	);
+	// res.send(
+		// `${email}, ${password}, ${confirm_password}, ${first_name}, ${last_name}`
+	// );
 });
 
 // GET /logout
