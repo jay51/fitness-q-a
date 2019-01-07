@@ -53,15 +53,20 @@ router.post("/register", function(req, res, next) {
 		error.status = 400;
 		return next(error);
 	}
-
-	// res.send(
-		// `${email}, ${password}, ${confirm_password}, ${first_name}, ${last_name}`
-	// );
 });
 
+
 // GET /logout
-router.get("/logout", function(req, res) {
+router.get("/logout", function(req, res, next) {
 	// Delete session & redirect to home page
+	if(req.session){
+		req.session.destroy(function(err){
+			if(err) return next(err);
+			return res.redirect("/");
+		});
+	}
+	
+	else return res.redirect("/");
 });
 
 module.exports = router;

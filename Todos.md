@@ -52,4 +52,5 @@ Use client-session or express-session
 Build error handler and a page for all errors to display to user, with connect-flash
 Use some of the good security practices such as using Helmet, bcrypt, cross-site-security-forgery
 
-Note: node-gyp only works with stable/released versions of node. Since the bcrypt module uses node-gyp to build and install you'll need a stable version of node to use bcrypt. If you do not you'll likely see an error that starts with:
+Note: node-gyp only works with stable/released versions of node. Since the bcrypt module uses node-gyp to build and install 
+you'll need a stable version of node to use bcrypt. If you do not you'll likely see an error that starts with:
