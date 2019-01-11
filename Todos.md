@@ -26,6 +26,7 @@
 [] Loged out users can see questions
 [] Remove bodyParser because new express comes with bodyParser
 [] Convert the code to use promises
+[] Rwrite the project with an API and a front-end framework (React)
 
 ## REST ROUTE for questions METHOD
 
