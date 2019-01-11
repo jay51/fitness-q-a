@@ -4,6 +4,7 @@ function requiresLogin(req, res, next){
         error.status = 401;
         return next(error)
     }
+    console.log("middleware",req.session.userId)
     return next();
 }
 

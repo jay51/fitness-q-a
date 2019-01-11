@@ -25,4 +25,23 @@ userSchema.pre("save", function(next) {
 	
 });
 
+
+// look up user and compare password
+userSchema.statics.authenticate = function(email, password, callback){
+	this.findOne({email})
+		.exec(function(err, user){
+			if(err || !user) return callback(err);
+		
+			bcrypt.compare(password, user.password, function(err, is_correct){
+				if(err) return callback(err);
+				if(is_correct) return callback(null, user);
+				else{
+					const error = new Error("Password is incorrect");
+					error.status = 401;
+					return callback(error)
+				}
+			});
+		});
+}
+
 module.exports = mongoose.model("Users", userSchema);

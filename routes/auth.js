@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const User = require("../models/users");
+const mid = require("../middleware/auth");
 
 // GET /login
 router.get("/login", function(req, res) {
@@ -8,16 +9,32 @@ router.get("/login", function(req, res) {
 });
 
 // POST /login
-router.post("/login", function(req, res) {
+router.post("/login", function(req, res, next) {
 	const { email, password } = req.body;
 	// check hashed password
 	// set the session
-	console.log(email, password);
-	res.send(`${email}, ${password}`);
+	
+	if(password && email){
+		// check hash password
+		User.authenticate(email, password, function(err, user){
+			if(err || !user){
+				const error = new Error("Wrong Email or Password!");
+				error.status = 401;
+				return next(error);
+			}
+			req.session.userId = user._id;
+			return res.redirect("/questions");
+		});
+		
+	} else {	
+		const error = new Error("Please Enter a password");
+		error.status = 401;
+		return next(error);
+	}
 });
 
 // GET /register
-router.get("/register", function(req, res) {
+router.get("/register", mid.requiresLogin, function(req, res) {
 	res.render("auth/register");
 });
 

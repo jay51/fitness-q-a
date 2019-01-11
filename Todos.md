@@ -3,13 +3,14 @@
 [X] Connect BootStrap  
 [X] Connect DB
 [X] Designe DB
-1.[] Create users
+1.[X] Create users
 2.[] Create questions
 3.[] Edit questions
 4.[] Delete questions
 5.[] Create answers
 6.[] Edit questions
 7.[] Delete answers
+[] Redirect to new question when making a new question
 [] Add AUTH
 -[] Render a register form
 -[] Encrypt Password
@@ -23,7 +24,8 @@
 [] Create helper methods to handle voting / a method to handle timeupdating when user edit question
 [] implement methodOverride
 [] Loged out users can see questions
-[ ] Remove bodyParser because new express comes with bodyParser
+[] Remove bodyParser because new express comes with bodyParser
+[] Convert the code to use promises
 
 ## REST ROUTE for questions METHOD
 
