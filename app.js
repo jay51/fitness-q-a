@@ -24,7 +24,7 @@ app.use(express.urlencoded({ extended: false }));
 mongoose.connect(
 	"mongodb://localhost/fitness",
 	{ useNewUrlParser: true }
-);
+).then(console.log("DB Connected"));
 const db = mongoose.connection;
 
 // set up the session 
