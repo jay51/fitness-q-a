@@ -46,13 +46,6 @@ unccessry money just to hear it form a Doctor.
 
 #### ROUTE for questions METHOD
 
-questions/:qID/answers POST
-questions/:qID/answers DELETE
-questions/:qID/answers PUT
-questions/:qID/:vote-up answers POST
-questions/:qID/:vote-down answers POST
-
-
 |Route                             |Method |
 |:--                               | --:   |
 |questions/:qID/answers            | POST  |
