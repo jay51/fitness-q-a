@@ -24,7 +24,8 @@ unccessry money just to hear it form a Doctor.
 - * [ ] Set session & Redirect to Home page 
 - * [X] Render a login form
 - * [ ] Validate Date coming from login form
-- * [ ] Pull user from DB and set session
+- * [ ] Pull user from DB and compare password and set session
+* [ ] Implement user deletion feature
 * [ ] check for input (Cross Site Scpripting)
 * [ ] Create view Templates
 * [ ] Make simple POST routes and forms
@@ -50,6 +51,15 @@ questions/:qID/answers DELETE
 questions/:qID/answers PUT
 questions/:qID/:vote-up answers POST
 questions/:qID/:vote-down answers POST
+
+
+|Route                             |Method |
+|:--                               | --:   |
+|questions/:qID/answers            | POST  |
+|questions/:qID/answers            | DELETE|
+|questions/:qID/answers            | PUT   |
+|questions/:qID/:vote-up(ANSWERS)  | POST  |
+|questions/:qID/:vote-down(ANSWERS)| POST  |
 
 <!-- just Some ideas -->
 
