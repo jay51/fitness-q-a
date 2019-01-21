@@ -10,11 +10,11 @@ router.post("/answers", function(req, res, next) {
 			question.answers.push(answer);
 			answer.save();
 			question.save();
+			res.json({
+				question,
+				answer
+			});
 		});
-	});
-
-	res.json({
-		question: req.params.qID
 	});
 });
 

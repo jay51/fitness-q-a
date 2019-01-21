@@ -9,17 +9,33 @@ block content
             span.float-right 10 min
             
           .card-body
-            h5.card-title.font-weight-bold What foods are healthy for scken?
+            h5.card-title.font-weight-bold #{question}
             hr
-            p.card-text.mt-5.mb-5 With supporting text below as a natural lead-in to additional content.supporting text below as a natural lead-in to additional content.supporting text below as a natural lead-in to additional content.supporting text below as a natural lead-in to additional content.
+            p.card-text.mt-5.mb-5 #{description}
 
             button.btn.btn-primary.mr-1 Like
             button.btn.btn-info Comment
     
+    //- loop over all answers and output in this formate
     h2.font-weight-bold.mt-3 Ansewers
+    p #{createdAt}
+    each answer in answers
+      .row.mt-2
+        .col.h-100
+          .card.mb-3
+            .card-header John Dow
+              span.float-right 10 min
+              
+            .card-body
+
+              p.card-text.mt-1.mb-4 #{answer.answer}
+
+              button.btn.btn-primary Like
+    
+
     .row.mt-2
       .col.h-100
-        .card
+        .card.mb-3
           .card-header John Dow
             span.float-right 10 min
             
@@ -28,3 +44,20 @@ block content
             p.card-text.mt-1.mb-4 With supporting text below as a natural lead-in to additional content.supporting text below as a natural lead-in to additional content.supporting text below as a natural lead-in to additional content.supporting text below as a natural lead-in to additional content.
 
             button.btn.btn-primary Like
+      
+    .row.mt-2
+      .col.h-100
+        .card
+          .card-header
+            label(for="answer") Your Answer
+            span.float-right 10 min
+
+          .card-body
+            form(action="/questions/" + _id + "/answers", method="POST")
+              .form-group
+                textarea(name="answer", class="form-control", cols="30", rows="10")
+                hr
+                button(type="submit", class="btn btn-primary") Submit
+
+
+
