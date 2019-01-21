@@ -2,8 +2,7 @@
 [X] Make simple GET routes and views
 [X] Connect BootStrap  
 [X] Connect DB
-[X] Designe DB
-1.[X] Create users
+[X] Designe DB 1.[X] Create users
 2.[] Create questions
 3.[] Edit questions
 4.[] Delete questions
@@ -24,6 +23,7 @@
 [] Create helper methods to handle voting / a method to handle timeupdating when user edit question
 [] implement methodOverride
 [] Loged out users can see questions
+[] Implement Search feature
 [] Remove bodyParser because new express comes with bodyParser
 [] Convert the code to use promises
 [] Rwrite the project with an API and a front-end framework (React)
@@ -55,5 +55,5 @@ Use client-session or express-session
 Build error handler and a page for all errors to display to user, with connect-flash
 Use some of the good security practices such as using Helmet, bcrypt, cross-site-security-forgery
 
-Note: node-gyp only works with stable/released versions of node. Since the bcrypt module uses node-gyp to build and install 
+Note: node-gyp only works with stable/released versions of node. Since the bcrypt module uses node-gyp to build and install
 you'll need a stable version of node to use bcrypt. If you do not you'll likely see an error that starts with:

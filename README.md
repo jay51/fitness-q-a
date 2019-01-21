@@ -1,58 +1,64 @@
 ## Fitness Q/A
+
 Simple fitness questions and answer app similare to stackoverflow but for health and fitness.
-The motivation behind this project is to help peoplel find answers to simple questions that otherwise you would have to pay 
+The motivation behind this project is to help peoplel find answers to simple questions that otherwise you would have to pay
 unccessry money just to hear it form a Doctor.
 
-
 ### Progress
-* [X] Create simple server
-* [X] Make simple GET routes and views
-* [X] Connect BootStrap  
-* [X] Connect DB
-* [X] Designe DB
-1. * [X] Create users
-2. * [ ] Create questions
-3. * [ ] Edit questions
-4. * [ ] Delete questions
-5. * [ ] Create answers
-6. * [ ] Edit questions
-7. * [ ] Delete answers
-* [ ] Add AUTH
-- * [ ] Render a register form
-- * [ ] Encrypt Password
-- * [ ] Create a user
-- * [ ] Set session & Redirect to Home page 
-- * [X] Render a login form
-- * [ ] Validate Date coming from login form
-- * [ ] Pull user from DB and compare password and set session
-* [ ] Implement user deletion feature
-* [ ] check for input (Cross Site Scpripting)
-* [ ] Create view Templates
-* [ ] Make simple POST routes and forms
-* [ ] Create helper methods to handle voting / a method to handle timeupdating when user edit question
-* [ ] implement methodOverride
-* [ ] Loged out users can see questions
+
+- [x] Create simple server
+- [x] Make simple GET routes and views
+- [x] Connect BootStrap
+- [x] Connect DB
+- [x] Designe DB
+
+1. - [x] Create users
+2. - [x] Create questions
+3. - [ ] Edit questions
+4. - [ ] Delete questions
+5. - [ ] Create answers
+6. - [ ] Edit questions
+7. - [ ] Delete answers
+
+- [ ] Add AUTH
+
+* - [x] Render a register form
+* - [x] Encrypt Password
+* - [x] Create a user
+* - [x] Set session & Redirect to Home page
+* - [x] Render a login form
+* - [x] Validate Date coming from login form
+* - [x] Pull user from DB and compare password and set session
+
+- [ ] Implement user deletion feature
+- [ ] check for input (Cross Site Scpripting)
+- [ ] Create view Templates
+- [ ] Make simple POST routes and forms
+- [ ] Create helper methods to handle voting / a method to handle timeupdating when user edit question
+- [ ] implement methodOverride
+- [ ] Implement Search feature
+- [ ] Loged out users can see questions
 
 #### REST ROUTE for questions METHOD
 
-|Route          |Method  |
-|:--            | --:    |
-|questions      | GET    |
-|questions      | POST   |
-|questions/new  | GET    |
-|questions/:qID | GET    |
-|questions/:qID | DELETE |
-|questions/:qID | PUT    |
+| Route          | Method |
+| :------------- | -----: |
+| questions      |    GET |
+| questions      |   POST |
+| questions/new  |    GET |
+| questions/:qID |    GET |
+| questions/:qID | DELETE |
+| questions/:qID |    PUT |
 
 #### ROUTE for questions METHOD
 
-|Route                             |Method |
-|:--                               | --:   |
-|questions/:qID/answers            | POST  |
-|questions/:qID/answers            | DELETE|
-|questions/:qID/answers            | PUT   |
-|questions/:qID/:vote-up(ANSWERS)  | POST  |
-|questions/:qID/:vote-down(ANSWERS)| POST  |
+| Route                              | Method |
+| :--------------------------------- | -----: |
+| questions/:qID/answers             |   POST |
+| questions/:qID/answers             | DELETE |
+| questions/:qID/answers             |    PUT |
+| questions/:qID/:vote-up(ANSWERS)   |   POST |
+| questions/:qID/:vote-down(ANSWERS) |   POST |
 
 <!-- just Some ideas -->
 
