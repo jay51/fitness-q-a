@@ -39,26 +39,29 @@ unccessry money just to hear it form a Doctor.
 - [ ] Implement Search feature
 - [ ] Loged out users can see questions
 
-#### REST ROUTE for questions METHOD
+#### REST ROUTE for questions
 
 | Route          | Method |
 | :------------- | -----: |
 | questions      |    GET |
-| questions      |   POST |
 | questions/new  |    GET |
+| questions      |   POST |
 | questions/:qID |    GET |
 | questions/:qID | DELETE |
 | questions/:qID |    PUT |
+| questions/:qID/:vote-up(ANSWERS)   |   POST |
+| questions/:qID/:vote-down(ANSWERS) |   POST |
 
-#### ROUTE for questions METHOD
+#### ROUTE for questions
 
 | Route                              | Method |
 | :--------------------------------- | -----: |
+| questions/:qID/answers             |   GET  |
 | questions/:qID/answers             |   POST |
 | questions/:qID/answers             | DELETE |
 | questions/:qID/answers             |    PUT |
-| questions/:qID/:vote-up(ANSWERS)   |   POST |
-| questions/:qID/:vote-down(ANSWERS) |   POST |
+| questions/:qID/answers/:aID/:vote-up(ANSWERS)   |   POST |
+| questions/:qID/answers/:aID/:vote-down(ANSWERS) |   POST |
 
 <!-- just Some ideas -->
 
