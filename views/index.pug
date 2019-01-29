@@ -14,5 +14,8 @@ block content
                 h5.card-title #{question.question}
                 p.card-text #{question.description}
                 a.btn.btn-primary(href="/questions/" + question._id) Go To Blog
+                form(action="/questions/" + question._id + "?_method=DELETE", method="POST")
+                  button.btn.btn-primary.m-3 Delete
+
 
 

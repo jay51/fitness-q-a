@@ -33,6 +33,7 @@ answersSchema.method("vote", function(vote, callback) {
 	this.save(callback);
 });
 
+// when user delete answer, remove ansewerId from question
 answersSchema.method("deleteAnswerId", function(id, callback) {
 	//becareful of the (this) keyword
 	this.model("Questions").findById(id, (err, question) => {

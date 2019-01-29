@@ -1,5 +1,6 @@
 const express = require("express");
 const Question = require("../models/questions");
+const Answer = require("../models/answers");
 const router = express.Router();
 
 router.param("qID", function(req, res, next, id) {
@@ -59,8 +60,16 @@ router.get("/questions/:qID", function(req, res, next) {
 
 // DELETE /questions/:qID
 router.delete("/questions/:qID", function(req, res) {
-	// delete question whit that qID
+	// delete question with that qID
 	Question.findOneAndDelete({ _id: req.params.qID }, function(err, question) {
+		// delete the answers
+		const answersId = question.answers;
+		answersId.forEach(id => {
+			Answer.findByIdAndDelete(id, function() {
+				console.log("deleted");
+			});
+		});
+
 		res.json({
 			question
 		});
