@@ -15,12 +15,12 @@ unccessry money just to hear it form a Doctor.
 1. - [x] Create users
 2. - [x] Create questions
 3. - [ ] Edit questions
-4. - [ ] Delete questions
-5. - [ ] Create answers
+4. - [X] Delete questions
+5. - [X] Create answers(route is not done)
 6. - [ ] Edit questions
 7. - [ ] Delete answers
 
-- [ ] Add AUTH
+- [X] Add AUTH
 
 * - [x] Render a register form
 * - [x] Encrypt Password
@@ -35,7 +35,7 @@ unccessry money just to hear it form a Doctor.
 - [ ] Create view Templates
 - [ ] Make simple POST routes and forms
 - [ ] Create helper methods to handle voting / a method to handle timeupdating when user edit question
-- [ ] implement methodOverride
+- [X] implement methodOverride
 - [ ] Implement Search feature
 - [ ] Loged out users can see questions
 
