@@ -1,4 +1,5 @@
 "use strict";
+const User = require("./models/users");
 const express = require("express");
 // const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
@@ -20,15 +21,12 @@ app.use(morgan("dev"));
 app.set("view engine", "pug");
 app.use(express.static(__dirname + "/public"));
 app.use(express.urlencoded({ extended: false }));
-// app.use(bodyParser.json()); // for json body for postman test
+// app.use(bodyParser.json());//for json body & postman test
 
 // mongodb://localhost:27017/fitness // loacal Docker DB
 // mongodb://localhost/fitness // cloud9
 mongoose
-	.connect(
-		"mongodb://localhost/fitness",
-		{ useNewUrlParser: true }
-	)
+	.connect("mongodb://localhost/fitness", { useNewUrlParser: true })
 	.then(console.log("DB Connected"));
 const db = mongoose.connection;
 
@@ -44,6 +42,18 @@ app.use(
 		})
 	})
 );
+
+// store user in req
+app.use(function(req, res, next) {
+	const id = req.session.userId;
+	if (!id) return next();
+	User.findById(id, function(err, founduser) {
+		if (err) return next(err);
+		req.user = founduser;
+		res.locals.currentUser = founduser.first_name;
+		return next();
+	});
+});
 
 // routes
 // you would need to put the more spsific routes or middelwares at the top

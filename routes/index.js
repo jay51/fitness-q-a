@@ -1,6 +1,7 @@
+const Answer = require("../models/answers");
 const express = require("express");
 const Question = require("../models/questions");
-const Answer = require("../models/answers");
+const auth = require("../middleware/auth");
 const router = express.Router();
 
 router.param("qID", function(req, res, next, id) {
@@ -29,19 +30,21 @@ router.get("/questions", function(req, res, next) {
 });
 
 // GET /questions/new
-router.get("/questions/new", function(req, res) {
+router.get("/questions/new", auth.requiresLogin, function(req, res) {
 	res.render("questions/new_question.pug");
 });
 
 // POST /questions
 router.post("/questions", function(req, res, next) {
 	console.log(req.body);
-	const question = new Question(req.body);
-	question.save(function(err, questions) {
-		if (err) {
-			return next(err);
-		}
-		res.json(questions);
+	// const questionData = { ...req.body };
+	Question.create(req.body, function(err, question) {
+		if (err) return next(err);
+		// save user info to question
+		question.author.id = req.user._id;
+		question.author.username = req.user.first_name;
+		question.save();
+		res.json(question);
 	});
 });
 

@@ -7,6 +7,7 @@ router.post("/answers", function(req, res, next) {
 	//add answer to a question
 	Question.findById(req.params.qID, function(err, question) {
 		Answer.create(req.body, function(err, answer) {
+			// push answer doc to question.answer array to save id
 			question.answers.push(answer);
 			answer.save();
 			question.save();
