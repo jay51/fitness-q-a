@@ -36,15 +36,19 @@ questionsSchema.methods.vote = function(user) {
 	// loop over voters id to check if user voted already
 	let [id] = this.voters.filter(id => user._id.equals(id));
 
+	// if no user in voters add user and increament
 	if (!id) {
 		this.voters.push(user);
 		if (!this.votes) this.votes = 0;
 		this.votes += 1;
+	} else {
+		// remove user and decreament like
+		// this.voters.splice(index, elements to slice);
+		let indexOfId = this.voters.indexOf(id);
+		console.log(indexOfId);
+		this.voters.splice(indexOfId, 1);
+		this.votes -= 1;
 	}
-	// Todo:
-	// if user in voters don't upvote else vote
-	// Else if user in voters and clickd like
-	// take him out of voters and decreament votes
 };
 
 // Todo:
