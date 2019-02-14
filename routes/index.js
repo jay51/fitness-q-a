@@ -87,7 +87,16 @@ router.put("/questions/:qID", function(req, res) {
 	});
 });
 
-// Todo
-// Implement spesific question up-vote and down-vote
+// POST /questions/:qID/vote-up only
+router.post("/questions/:qID/vote-up", auth.requiresLogin, function(
+	req,
+	res,
+	next
+) {
+	// votes user if hasn't already voted
+	req.question.vote(req.user);
+	req.question.save();
+	return res.redirect(`/questions/${req.params.qID}`);
+});
 
 module.exports = router;

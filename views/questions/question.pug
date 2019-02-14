@@ -13,8 +13,10 @@ block content
             hr
             p.card-text.mt-5.mb-5 #{description}
 
-            button.btn.btn-primary.mr-1 Like
-            button.btn.btn-info Comment
+            form(action="/questions/" + _id + "/vote-up", method="POST", class="d-inline")
+              button.btn.btn-primary.mr-1 Like #{votes}
+            a.btn.btn-info(href="#comment") Comment
+            
     
     //- loop over all answers and output in this formate
     h2.font-weight-bold.mt-3 Ansewers
@@ -55,7 +57,7 @@ block content
           .card-body
             form(action="/questions/" + _id + "/answers", method="POST")
               .form-group
-                textarea(name="answer", class="form-control", cols="30", rows="10")
+                textarea#comment(name="answer", class="form-control", cols="30", rows="10")
                 hr
                 button(type="submit", class="btn btn-primary") Submit
 
