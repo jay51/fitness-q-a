@@ -12,14 +12,17 @@ block content
             h5.card-title.font-weight-bold #{question}
             hr
             p.card-text.mt-5.mb-5 #{description}
-            //- Todo:
-            //- Hide like,comment buttons if user not logged in
-            //- view only number of likes
-            form(action="/questions/" + _id + "/vote-up", method="POST", class="d-inline")
-              button.btn.btn-primary.mr-1 Like #{votes}
-            a.btn.btn-info(href="#comment") Comment
+            if currentUser 
+              form(action="/questions/" + _id + "/vote-up", method="POST", class="d-inline")
+                button.btn.btn-primary.mr-1 Like #{votes}
+                a.btn.btn-info(href="#comment") Comment
+            else 
+              p.d-inline.p-2.bg-primary.text-white Likes #{votes}
             
     
+    //- Todo:
+    //- Hide like buttons if user not logged in
+    //- view only number of likes
     //- loop over all answers and output in this formate
     h2.font-weight-bold.mt-3 Ansewers
     p #{createdAt}
