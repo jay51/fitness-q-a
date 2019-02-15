@@ -1,4 +1,4 @@
-## Fitness Q/A
+## 🌱Fitness Q/A
 
 Simple fitness questions and answer app similare to stackoverflow but for health and fitness.
 The motivation behind this project is to help peoplel find answers to simple questions that otherwise you would have to pay
@@ -39,7 +39,7 @@ unccessry money just to hear it form a Doctor.
 - [ ] Implement Search feature
 - [ ] Loged out users can see questions
 
-#### REST ROUTE for questions
+#### ROUTES for Questions
 
 | Route          | Method |
 | :------------- | -----: |
@@ -49,10 +49,10 @@ unccessry money just to hear it form a Doctor.
 | questions/:qID |    GET |
 | questions/:qID | DELETE |
 | questions/:qID |    PUT |
-| questions/:qID/:vote-up(ANSWERS)   |   POST |
-| questions/:qID/:vote-down(ANSWERS) |   POST |
+| questions/:qID/vote-up  |   POST |
 
-#### ROUTE for questions
+
+#### ROUTES for Answers
 
 | Route                              | Method |
 | :--------------------------------- | -----: |
@@ -60,17 +60,9 @@ unccessry money just to hear it form a Doctor.
 | questions/:qID/answers             |   POST |
 | questions/:qID/answers             | DELETE |
 | questions/:qID/answers             |    PUT |
-| questions/:qID/answers/:aID/:vote-up(ANSWERS)   |   POST |
-| questions/:qID/answers/:aID/:vote-down(ANSWERS) |   POST |
+| questions/:qID/answers/:aID/vote-up(ANSWERS)   |   POST |
+
 
 <!-- just Some ideas -->
-
-Make a express applecations for asking questions
-use cooke/session auth for authintication
-create users and question and comment DB relationship
-Use pug for the server side view engine
-Use client-session or express-session
-Build error handler and a page for all errors to display to user, with connect-flash
-Use some of the good security practices such as using Helmet, bcrypt, cross-site-security-forgery
 
 Note: node-gyp only works with stable/released versions of node. Since the bcrypt module uses node-gyp to build and install you'll need a stable version of node to use bcrypt. If you do not you'll likely see an error that starts with:
