@@ -1,7 +1,24 @@
 const express = require("express");
 const Answer = require("../models/answers");
 const Question = require("../models/questions");
+const auth = require("../middleware/auth");
 const router = express.Router({ mergeParams: true });
+
+// router.param("qID", function(req, res, next, id) {
+// 	Question.findById(id, function(err, question) {
+// 		if (err) return next(err);
+// 		if (!question) {
+// 			const error = new Error("Not Found");
+// 			error.status = 404;
+// 			return next(error);
+// 		}
+// 		req.question = question;
+// 		return next();
+// 	});
+// });
+
+//Note:
+// No need for GET because it's renderd on /question/qID
 
 router.post("/answers", function(req, res, next) {
 	//add answer to a question
@@ -9,6 +26,9 @@ router.post("/answers", function(req, res, next) {
 		Answer.create(req.body, function(err, answer) {
 			// push answer doc to question.answer array to save id
 			question.answers.push(answer);
+			// save user to answer
+			answer.author.username = req.user.first_name;
+			answer.author.id = req.user._id;
 			answer.save();
 			question.save();
 			res.json({

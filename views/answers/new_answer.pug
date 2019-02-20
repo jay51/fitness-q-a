@@ -1,0 +1,13 @@
+extends ../layout.pug
+
+block content
+  .container
+    .row
+      .text-center.w-100
+        .col-sm-12
+        form(action="/questions/" + qID + "/answers", method="POST")
+          .form-group
+            label(for="answer") Answer
+            textarea(class="form-control" , name="answer", id="answer", row="3")
+            
+          button(type="submit" class="btn btn-primary m-2") Create  
