@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const answersSchema = new Schema({
-	answer: String,
+	answer: { type: String, trim: true },
 	votes: { type: Number, default: 0 },
 	// all users that vote on answer will be added to voters to limit user to 1 vote
 	voters: [
@@ -12,7 +12,8 @@ const answersSchema = new Schema({
 			ref: "Users"
 		}
 	],
-	date: { type: Date, default: formatDate },
+	// makeing type=Date will tell mongoose to formate text for you.
+	date: { type: String, default: getFormatedDate },
 	// each answer will have a author to check for answer ownership
 	author: {
 		username: String,
@@ -43,7 +44,7 @@ answersSchema.method("deleteAnswerId", function(id, callback) {
 	});
 });
 
-function formatDate() {
+function getFormatedDate() {
 	const date = new Date();
 	const monthNames = [
 		"January",
