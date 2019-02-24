@@ -24,7 +24,7 @@ router.get("/questions", function(req, res, next) {
 	const query = Question.find({}, null, { limit: queryLimit });
 	query.exec(function(err, questions) {
 		console.log("One Doc: ", questions);
-		// res.json(question);
+		// res.json(questions);
 		res.render("index.pug", { questions });
 	});
 });
@@ -54,7 +54,9 @@ router.get("/questions/:qID", function(req, res, next) {
 	Question.findById(req.params.qID)
 		.populate("answers")
 		.exec(function(err, foundQuestion) {
+			if (err) return next(err);
 			console.log(foundQuestion);
+			// foundQuestion look like {question:"...", author:{...}}
 			return res.render("questions/question", foundQuestion);
 		});
 

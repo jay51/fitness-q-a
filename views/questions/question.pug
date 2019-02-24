@@ -5,7 +5,7 @@ block content
     .row.mt-4
       .col.h-100
         .card
-          .card-header #{currentUser} 
+          .card-header #{author.username} 
             span.float-right 10 min
             
           .card-body
@@ -22,15 +22,15 @@ block content
     
     //- Todo:
     //- Hide like buttons if user not logged in
-    //- view only number of likes
-    //- loop over all answers and output in this formate
+    //- View only number of likes
+    //- Loop over all answers and output in this formate
     h2.font-weight-bold.mt-3 Ansewers
     p #{createdAt}
     each answer in answers
       .row.mt-2
         .col.h-100
           .card.mb-3
-            .card-header John Dow
+            .card-header #{answer.author.username}
               span.float-right 10 min
               
             .card-body

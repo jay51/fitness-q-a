@@ -3,11 +3,12 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const questionsSchema = new Schema({
-	question: String,
-	description: String,
+	question: { type: String, trim: true },
+	description: { type: String, trim: true },
 	// votes: { tyep: Number, default: 0 },
 	votes: Number,
-	createdAt: { type: Date, default: new Date().toLocaleString() },
+	// makeing type=Date will tell mongoose to formate text for you.
+	createdAt: { type: String, default: getFormatedDate },
 	// a question will have ref to answers
 	answers: [
 		{
@@ -32,6 +33,9 @@ const questionsSchema = new Schema({
 	}
 });
 
+// Todo:
+// sort answers by <something>
+
 questionsSchema.methods.vote = function(user) {
 	// loop over voters id to check if user voted already
 	let [id] = this.voters.filter(id => user._id.equals(id));
@@ -51,7 +55,27 @@ questionsSchema.methods.vote = function(user) {
 	}
 };
 
-// Todo:
-// sort answers by <something>
+function getFormatedDate() {
+	const date = new Date();
+	const monthNames = [
+		"January",
+		"February",
+		"March",
+		"April",
+		"May",
+		"June",
+		"July",
+		"August",
+		"September",
+		"October",
+		"November",
+		"December"
+	];
 
+	const day = date.getDate();
+	const monthIndex = date.getMonth();
+	const year = date.getFullYear();
+
+	return day + " " + monthNames[monthIndex] + " " + year;
+}
 module.exports = mongoose.model("Questions", questionsSchema);

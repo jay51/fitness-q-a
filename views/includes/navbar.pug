@@ -7,8 +7,9 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-light
     ul.navbar-nav.mr-auto
       li.nav-item.active
         a.nav-link(href="/questions") Home
-      li.nav-item.active
-        a.nav-link(href="questions/new") New 
+      if currentUser
+        li.nav-item.active
+          a.nav-link(href="questions/new") New 
                
     a.btn.btn-primary.m-2(href="/login") Sign in
     a.btn.btn-primary(href="register") Sign up
