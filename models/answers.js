@@ -12,7 +12,7 @@ const answersSchema = new Schema({
 			ref: "Users"
 		}
 	],
-	date: { type: Date, default: new Date().toLocaleString() },
+	date: { type: Date, default: formatDate },
 	// each answer will have a author to check for answer ownership
 	author: {
 		username: String,
@@ -42,5 +42,29 @@ answersSchema.method("deleteAnswerId", function(id, callback) {
 		question.save();
 	});
 });
+
+function formatDate() {
+	const date = new Date();
+	const monthNames = [
+		"January",
+		"February",
+		"March",
+		"April",
+		"May",
+		"June",
+		"July",
+		"August",
+		"September",
+		"October",
+		"November",
+		"December"
+	];
+
+	const day = date.getDate();
+	const monthIndex = date.getMonth();
+	const year = date.getFullYear();
+
+	return day + " " + monthNames[monthIndex] + " " + year;
+}
 
 module.exports = mongoose.model("Answers", answersSchema);

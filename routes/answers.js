@@ -23,18 +23,18 @@ const router = express.Router({ mergeParams: true });
 router.post("/answers", function(req, res, next) {
 	//add answer to a question
 	Question.findById(req.params.qID, function(err, question) {
-		Answer.create(req.body, function(err, answer) {
-			// push answer doc to question.answer array to save id
-			question.answers.push(answer);
-			// save user to answer
-			answer.author.username = req.user.first_name;
-			answer.author.id = req.user._id;
-			answer.save();
-			question.save();
-			res.json({
-				question,
-				answer
-			});
+		const newAnswer = new Answer(req.body);
+		// push answer doc to question.answer array to save id
+		question.answers.push(newAnswer);
+		// save user to answer
+		newAnswer.author.username = req.user.first_name;
+		newAnswer.author.id = req.user._id;
+		newAnswer.save();
+		question.save();
+
+		res.json({
+			question,
+			newAnswer
 		});
 	});
 });
