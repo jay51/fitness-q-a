@@ -1,27 +1,29 @@
 {
-  "name": "questions",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon app.js"
-  },
-  "keywords": [],
-  "author": "Jay",
-  "license": "ISC",
-  "devDependencies": {
-    "nodemon": "^1.18.4"
-  },
-  "dependencies": {
-    "bcrypt": "^3.0.2",
-    "body-parser": "^1.18.3",
-    "connect-mongo": "^2.0.3",
-    "express": "^4.16.4",
-    "express-session": "^1.15.6",
-    "method-override": "^3.0.0",
-    "mongoose": "^5.3.7",
-    "morgan": "^1.9.1",
-    "pug": "^2.0.3"
-  }
+	"name": "questions",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"test": "jest --detectOpenHandles",
+		"start": "nodemon app.js"
+	},
+	"keywords": [],
+	"author": "Jay",
+	"license": "ISC",
+	"devDependencies": {
+		"jest": "^24.1.0",
+		"nodemon": "^1.18.4",
+		"supertest": "^3.4.2"
+	},
+	"dependencies": {
+		"bcrypt": "^3.0.2",
+		"body-parser": "^1.18.3",
+		"connect-mongo": "^2.0.3",
+		"express": "^4.16.4",
+		"express-session": "^1.15.6",
+		"method-override": "^3.0.0",
+		"mongoose": "^5.3.7",
+		"morgan": "^1.9.1",
+		"pug": "^2.0.3"
+	}
 }

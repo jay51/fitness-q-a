@@ -3,6 +3,7 @@
 [X] Connect BootStrap  
 [X] Connect DB
 [X] Designe DB 1.[X] Create users
+[] Write Test with supertest and mocha
 2.[] Create questions
 3.[] Edit questions
 4.[] Delete questions
@@ -47,13 +48,13 @@ questions/:qID/:vote-down answers POST
 
 <!-- just Some ideas -->
 
-Make a express applecations for asking questions
-use cooke/session auth for authintication
-create users and question and comment DB relationship
-Use pug for the server side view engine
-Use client-session or express-session
-Build error handler and a page for all errors to display to user, with connect-flash
-Use some of the good security practices such as using Helmet, bcrypt, cross-site-security-forgery
+1.Make a express applecations for asking questions
+2.use cooke/session auth for authintication
+3.create users and question and comment DB relationship
+4.Use pug for the server side view engine
+5.Use client-session or express-session
+6.Build error handler and a page for all errors to display to user, with connect-flash
+7.Use some of the good security practices such as using Helmet, bcrypt, cross-site-security-forgery
 
 Note: node-gyp only works with stable/released versions of node. Since the bcrypt module uses node-gyp to build and install
 you'll need a stable version of node to use bcrypt. If you do not you'll likely see an error that starts with:
