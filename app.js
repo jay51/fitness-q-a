@@ -78,7 +78,7 @@ app.use(function(err, req, res, next) {
 const port = process.env.PORT || 3000;
 
 if (!(process.env.NODE_ENV === "test")) {
-	app.listen(port, function() {
+	app.listen(port, function(err) {
 		if (err) console.log("Error while starting server");
 		console.log("server started on Port:", port);
 	});

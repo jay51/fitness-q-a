@@ -12,7 +12,7 @@ router.get("/questions", question.getQuestions);
 router.get("/questions/new", auth.requiresLogin, question.getNewQuestionForm);
 
 // POST /questions
-router.post("/questions", question.createQuestion);
+router.post("/questions", auth.requiresLogin, question.createQuestion);
 
 // GET /questions/:qID
 router.get("/questions/:qID", question.getQuestion);
