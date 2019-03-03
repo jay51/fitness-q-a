@@ -6,7 +6,7 @@ block content
       .col.h-100
         .card
           .card-header #{author.username} 
-            span.float-right 10 min
+            span.float-right #{createdAt}
             
           .card-body
             h5.card-title.font-weight-bold #{question}
@@ -31,7 +31,7 @@ block content
         .col.h-100
           .card.mb-3
             .card-header #{answer.author.username}
-              span.float-right 10 min
+              span.float-right #{answer.date}
               
             .card-body
 
