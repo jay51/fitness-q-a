@@ -56,7 +56,10 @@ exported.getQuestion = (req, res, next) => {
 			if (err) return next(err);
 			console.log(foundQuestion);
 			// foundQuestion look like {question:"...", author:{...}}
-			return res.render("questions/question", foundQuestion);
+			return res.render("questions/question", {
+				question: foundQuestion,
+				user: req.user
+			});
 		});
 
 	// return next(new Error("Not Found").status(404));
@@ -79,6 +82,10 @@ exported.deleteQuestion = (req, res) => {
 		});
 	});
 };
+
+// Todo:
+// Make a form with css and js that collaps for updating
+// Make it avalible for question owner only
 
 // PUT /questions/:qID
 exported.updateQuestion = (req, res, next) => {
