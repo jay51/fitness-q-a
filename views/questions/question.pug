@@ -16,31 +16,31 @@ block content
             //- If a user logged in, show like and comment
             if currentUser 
               form(action="/questions/" + question._id + "/vote-up", method="POST", class="d-inline")
-                button.btn.btn-primary.mr-1 Like #{votes}
+                button.btn.btn-primary.mr-1 Like #{question.votes}
                 a.btn.btn-info.mr-1(href="#comment") Comment
-                
-                //- If owner of question logged in, show update
-                if user &&  question.author.id.equals(user._id)
-                  button(type="button" class="btn btn-success" data-toggle="modal" data-target="#updateModal") Update
-                  <!-- Modal -->
-                    div(class="modal fade", id="updateModal", tabindex="-1", role="dialog", aria-labelledby="updateModalLabel", aria-hidden="true")
-
-                      div(class="modal-dialog", role="document")
-                        div.modal-content
-
-                          form(action="/", method="PUT")
-                            .modal-header
-                              input(type="text", class="modal-title", id="updateModalLabel", value=question.question) 
-                              button(type="button", class="close", data-dismiss="modal", aria-label="Close")
-                                span(aria-hidden="true") &times;
-                            div.modal-body
-                              textarea(name="description", class="form-control", rows="3") #{question.description}
-
-                            div(class="modal-footer")
-                              button(type="button", class="btn btn-secondary", data-dismiss="modal") Cancel
-                              button(type="submit", class="btn btn-primary",) Update
             else 
-              p.d-inline.p-2.bg-primary.text-white Likes #{votes}
+              p.d-inline.p-2.bg-primary.text-white Likes #{question.votes}
+                
+            //- If owner of question logged in, show update
+            if user &&  question.author.id.equals(user._id)
+              button(type="button" class="btn btn-success" data-toggle="modal" data-target="#updateModal") Update
+              <!-- Modal -->
+                div(class="modal fade", id="updateModal", tabindex="-1", role="dialog", aria-labelledby="updateModalLabel", aria-hidden="true")
+
+                  div(class="modal-dialog", role="document")
+                    div.modal-content
+
+                      form(action="/questions/" + question._id + "?_method=PUT", method="POST")
+                        .modal-header
+                          input(type="text", class="modal-title", id="updateModalLabel", value=question.question) 
+                          button(type="button", class="close", data-dismiss="modal", aria-label="Close")
+                            span(aria-hidden="true") &times;
+                        div.modal-body
+                          textarea(name="description", class="form-control", rows="3") #{question.description}
+
+                        div(class="modal-footer")
+                          button(type="button", class="btn btn-secondary", data-dismiss="modal") Cancel
+                          button(type="submit", class="btn btn-primary",) Update
             
     
     //- Todo:

@@ -84,7 +84,6 @@ exported.deleteQuestion = (req, res) => {
 };
 
 // Todo:
-// Make a form with css and js that collaps for updating
 // Make it avalible for question owner only
 
 // PUT /questions/:qID

@@ -21,7 +21,11 @@ router.get("/questions/:qID", question.getQuestion);
 router.delete("/questions/:qID", question.deleteQuestion);
 
 // PUT /questions/:qID
-router.put("/questions/:qID", question.updateQuestion);
+router.put(
+	"/questions/:qID",
+	auth.checkQuestionsOwnerShip,
+	question.updateQuestion
+);
 
 // POST /questions/:qID/vote-up only
 router.post(
