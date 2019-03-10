@@ -14,14 +14,10 @@ let server = request(app);
 // 		.end(done);
 // });
 
-// // POST /questions/:qID/vote-up only
-// router.post(
-// 	"/questions/:qID/vote-up",
-// 	auth.requiresLogin,
-// 	question.voteQuestion
-// );
-const aQuestionId = "5c78b8906c20cc5d22360a87";
-const aQuestionTitle = / /; ///Testing like and unlike/;
+// http://localhost:3000/questions/5c7c4035e8b4311568dcbd4d
+// this is a new questions
+const aQuestionId = "5c7c4035e8b4311568dcbd4d";
+const aQuestionTitle = /this is a new questions/;
 
 test("GET /", done => {
 	server.get("/").expect(404, done);
@@ -57,25 +53,31 @@ test("GET /questions/:qID", done => {
 		.expect(aQuestionTitle, done);
 });
 
-// will return 404 if question not found
+// will return 404 if question not found otherwise 401
 test("POST /questions/:qID/vote-up ", done => {
 	server.post(`/questions/${aQuestionId}/vote-up`).expect(401, done);
 });
 
-// ---------------------NOT WORKING------------------
+// +++++++++++++++It's working+++++++++++++++++
 // test("DELETE /questions/:qID", done => {
-// jest.setTimeout(10000);
-// server
-// /questions/5c7899a24552624a5b9c7f35?_method=DELETE
-// .delete(`/questions/${aQuestionId}`)
-// .type("application/x-www-form-urlencoded")
-// .expect(200);
+// 	// jest.setTimeout(10000); if need jest to wait for response longer
+// 	server
+// 		.delete(`/questions/${aQuestionId}`)
+// 		.type("application/x-www-form-urlencoded")
+// 		.expect(200, done);
 // });
 
-// test("PUT /questions/:qID", done => {
-// 	// jest.setTimeout(10000);
-// 	server
-// 		.put(`/questions/5c78b07cf0ea5957d1607b72`)
-// 		.type("application/x-www-form-urlencoded")
-// 		.expect(200);
-// });
+// +++++++++++++++It's working but not updateing question+++++++++++++++++
+test("PUT /questions/:qID", done => {
+	// jest.setTimeout(10000);
+	const question = {
+		question: "Hello world",
+		description: "A only Nigerian Nobel Laureate"
+	};
+	server
+		.put(`/questions/${aQuestionId}`)
+		.type("application/json")
+		// .send(question)
+		.send("question=Testing")
+		.expect(200, done);
+});

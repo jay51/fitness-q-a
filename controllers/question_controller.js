@@ -83,6 +83,7 @@ exported.deleteQuestion = (req, res) => {
 // PUT /questions/:qID
 exported.updateQuestion = (req, res, next) => {
 	// edit question whit that qID
+	console.log(req.body);
 	Question.findByIdAndUpdate(req.params.qID, req.body, function(err, question) {
 		return res.json(question);
 	});
