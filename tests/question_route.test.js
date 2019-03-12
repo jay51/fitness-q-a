@@ -17,10 +17,31 @@ let server = request(app);
 // http://localhost:3000/questions/5c7c4035e8b4311568dcbd4d
 // this is a new questions
 const aQuestionId = "5c7c4035e8b4311568dcbd4d";
-const aQuestionTitle = /this is a new questions/;
+const aQuestionTitle = /Testing/;
 
 test("GET /", done => {
 	server.get("/").expect(404, done);
+});
+
+// not authorized
+test("GET /questions/new", done => {
+	server.get("/questions/new").expect(401, done);
+});
+
+// not aauthorized unless you uncomment the free-post route
+test("POST /questions", done => {
+	const question = "question=Testing world";
+	const description = "description=A only Nigerian Nobel Laureate";
+
+	server
+		.post("/questions")
+		.send(`${question}&${description}`)
+		// Doesn't work because post route creates question but breaks before returning response back
+		.expect(res => {
+			aQuestionId = res._id;
+			aQuestionTitle = res.question;
+		})
+		.expect(401, done);
 });
 
 test("GET /questions", done => {
@@ -30,22 +51,6 @@ test("GET /questions", done => {
 		.expect(aQuestionTitle, done);
 });
 
-// not authorized
-test("GET /questions/new", done => {
-	server.get("/questions/new").expect(401, done);
-});
-
-// not aauthorized
-test("POST /questions", done => {
-	server
-		.post("/questions")
-		.send({
-			question: "Testing this route with jest and supertest",
-			description: "No description"
-		})
-		.expect(401, done);
-});
-
 test("GET /questions/:qID", done => {
 	server
 		.get(`/questions/${aQuestionId}`)
@@ -53,12 +58,19 @@ test("GET /questions/:qID", done => {
 		.expect(aQuestionTitle, done);
 });
 
-// will return 404 if question not found otherwise 401
-test("POST /questions/:qID/vote-up ", done => {
-	server.post(`/questions/${aQuestionId}/vote-up`).expect(401, done);
+// +++++++++++++++ It's working +++++++++++++++++
+test("PUT /questions/:qID", done => {
+	const question = "question=Testing world";
+	const description = "description=A only Nigerian Nobel Laureate";
+
+	server
+		.put(`/questions/${aQuestionId}`)
+		.type("application/json")
+		.send(`${question}&${description}`)
+		.expect(200, done);
 });
 
-// +++++++++++++++It's working+++++++++++++++++
+// +++++++++++++++ It's working +++++++++++++++++
 // test("DELETE /questions/:qID", done => {
 // 	// jest.setTimeout(10000); if need jest to wait for response longer
 // 	server
@@ -67,17 +79,7 @@ test("POST /questions/:qID/vote-up ", done => {
 // 		.expect(200, done);
 // });
 
-// +++++++++++++++It's working but not updateing question+++++++++++++++++
-test("PUT /questions/:qID", done => {
-	// jest.setTimeout(10000);
-	const question = {
-		question: "Hello world",
-		description: "A only Nigerian Nobel Laureate"
-	};
-	server
-		.put(`/questions/${aQuestionId}`)
-		.type("application/json")
-		// .send(question)
-		.send("question=Testing")
-		.expect(200, done);
+// will return 404 if question not found otherwise 401
+test("POST /questions/:qID/vote-up ", done => {
+	server.post(`/questions/${aQuestionId}/vote-up`).expect(401, done);
 });
