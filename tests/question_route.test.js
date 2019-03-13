@@ -76,6 +76,7 @@ test("PUT /questions/:qID", done => {
 	server
 		.put(`/questions/${aQuestion._id}`)
 		.type("application/json")
+		.set("cookie", cookie)
 		.send(`${question}&${description}`)
 		.expect(200, done);
 });
