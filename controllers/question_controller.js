@@ -24,13 +24,13 @@ exported.getQuestions = (req, res, next) => {
 	query.exec(function(err, questions) {
 		console.log("One Doc: ", questions);
 		// res.json(questions);
-		res.render("index.pug", { questions });
+		return res.render("index.pug", { questions });
 	});
 };
 
 // GET /questions/new
 exported.getNewQuestionForm = (req, res) => {
-	res.render("questions/new_question.pug");
+	return res.render("questions/new_question.pug");
 };
 
 // POST /questions
@@ -43,7 +43,7 @@ exported.createQuestion = (req, res, next) => {
 		question.author.id = req.user._id;
 		question.author.username = req.user.first_name;
 		question.save();
-		res.json(question);
+		return res.json(question);
 	});
 };
 
@@ -77,7 +77,7 @@ exported.deleteQuestion = (req, res) => {
 			});
 		});
 
-		res.json({
+		return res.json({
 			question
 		});
 	});
@@ -89,8 +89,9 @@ exported.deleteQuestion = (req, res) => {
 // PUT /questions/:qID
 exported.updateQuestion = (req, res, next) => {
 	// edit question whit that qID
+	console.log(req.body);
 	Question.findByIdAndUpdate(req.params.qID, req.body, function(err, question) {
-		res.json(question);
+		return res.json(question);
 	});
 };
 

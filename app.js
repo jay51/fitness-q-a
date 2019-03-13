@@ -76,7 +76,20 @@ app.use(function(err, req, res, next) {
 });
 
 const port = process.env.PORT || 3000;
-app.listen(port, function() {
-	// if (err) console.log("Error while starting server");
-	console.log("server started on Port:", port);
-});
+
+if (!(process.env.NODE_ENV === "test")) {
+	app.listen(port, function(err) {
+		if (err) console.log("Error while starting server");
+		console.log("server started on Port:", port);
+	});
+}
+
+if (process.env.NODE_ENV === "test") {
+	// if env = test then use mock DB
+	// mongoose.connection.close(function() {
+	// 	console.log("Mongoose connection disconnected");
+	// });
+}
+
+// Export server instance for Testing
+module.exports = app;
