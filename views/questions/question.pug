@@ -5,19 +5,42 @@ block content
     .row.mt-4
       .col.h-100
         .card
-          .card-header #{author.username} 
-            span.float-right 10 min
+          .card-header #{question.author.username} 
+            span.float-right #{question.createdAt}
             
           .card-body
-            h5.card-title.font-weight-bold #{question}
+            h5.card-title.font-weight-bold #{question.question}
             hr
-            p.card-text.mt-5.mb-5 #{description}
+            p.card-text.mt-5.mb-5 #{question.description}
+
+            //- If a user logged in, show like and comment
             if currentUser 
-              form(action="/questions/" + _id + "/vote-up", method="POST", class="d-inline")
-                button.btn.btn-primary.mr-1 Like #{votes}
-                a.btn.btn-info(href="#comment") Comment
+              form(action="/questions/" + question._id + "/vote-up", method="POST", class="d-inline")
+                button.btn.btn-primary.mr-1 Like #{question.votes}
+                a.btn.btn-info.mr-1(href="#comment") Comment
             else 
-              p.d-inline.p-2.bg-primary.text-white Likes #{votes}
+              p.d-inline.p-2.bg-primary.text-white Likes #{question.votes}
+                
+            //- If owner of question logged in, show update
+            if user &&  question.author.id.equals(user._id)
+              button(type="button" class="btn btn-success" data-toggle="modal" data-target="#updateModal") Update
+              <!-- Modal -->
+                div(class="modal fade", id="updateModal", tabindex="-1", role="dialog", aria-labelledby="updateModalLabel", aria-hidden="true")
+
+                  div(class="modal-dialog", role="document")
+                    div.modal-content
+
+                      form(action="/questions/" + question._id + "?_method=PUT", method="POST")
+                        .modal-header
+                          input(type="text", class="modal-title", id="updateModalLabel", value=question.question) 
+                          button(type="button", class="close", data-dismiss="modal", aria-label="Close")
+                            span(aria-hidden="true") &times;
+                        div.modal-body
+                          textarea(name="description", class="form-control", rows="3") #{question.description}
+
+                        div(class="modal-footer")
+                          button(type="button", class="btn btn-secondary", data-dismiss="modal") Cancel
+                          button(type="submit", class="btn btn-primary",) Update
             
     
     //- Todo:
@@ -25,13 +48,13 @@ block content
     //- View only number of likes
     //- Loop over all answers and output in this formate
     h2.font-weight-bold.mt-3 Ansewers
-    p #{createdAt}
-    each answer in answers
+    p #{question.createdAt}
+    each answer in question.answers
       .row.mt-2
         .col.h-100
           .card.mb-3
             .card-header #{answer.author.username}
-              span.float-right 10 min
+              span.float-right #{answer.date}
               
             .card-body
 
@@ -60,7 +83,7 @@ block content
             span.float-right 10 min
 
           .card-body
-            form(action="/questions/" + _id + "/answers", method="POST")
+            form(action="/questions/" + question._id + "/answers", method="POST")
               .form-group
                 textarea#comment(name="answer", class="form-control", cols="30", rows="10")
                 hr

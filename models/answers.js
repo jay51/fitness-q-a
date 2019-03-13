@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
+const date = new Date();
+const dateToString = date.toDateString.bind(date);
 
 const answersSchema = new Schema({
 	answer: { type: String, trim: true },
@@ -13,7 +15,7 @@ const answersSchema = new Schema({
 		}
 	],
 	// makeing type=Date will tell mongoose to formate text for you.
-	date: { type: String, default: getFormatedDate },
+	date: { type: String, default: dateToString },
 	// each answer will have a author to check for answer ownership
 	author: {
 		username: String,
@@ -43,29 +45,5 @@ answersSchema.method("deleteAnswerId", function(id, callback) {
 		question.save();
 	});
 });
-
-function getFormatedDate() {
-	const date = new Date();
-	const monthNames = [
-		"January",
-		"February",
-		"March",
-		"April",
-		"May",
-		"June",
-		"July",
-		"August",
-		"September",
-		"October",
-		"November",
-		"December"
-	];
-
-	const day = date.getDate();
-	const monthIndex = date.getMonth();
-	const year = date.getFullYear();
-
-	return day + " " + monthNames[monthIndex] + " " + year;
-}
 
 module.exports = mongoose.model("Answers", answersSchema);

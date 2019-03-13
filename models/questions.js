@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
+const date = new Date();
+const dateToString = date.toDateString.bind(date);
 
 const questionsSchema = new Schema({
 	question: { type: String, trim: true },
@@ -8,7 +10,7 @@ const questionsSchema = new Schema({
 	// votes: { tyep: Number, default: 0 },
 	votes: Number,
 	// makeing type=Date will tell mongoose to formate text for you.
-	createdAt: { type: String, default: getFormatedDate },
+	createdAt: { type: String, default: dateToString },
 	// a question will have ref to answers
 	answers: [
 		{
@@ -55,27 +57,4 @@ questionsSchema.methods.vote = function(user) {
 	}
 };
 
-function getFormatedDate() {
-	const date = new Date();
-	const monthNames = [
-		"January",
-		"February",
-		"March",
-		"April",
-		"May",
-		"June",
-		"July",
-		"August",
-		"September",
-		"October",
-		"November",
-		"December"
-	];
-
-	const day = date.getDate();
-	const monthIndex = date.getMonth();
-	const year = date.getFullYear();
-
-	return day + " " + monthNames[monthIndex] + " " + year;
-}
 module.exports = mongoose.model("Questions", questionsSchema);
