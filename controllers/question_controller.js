@@ -5,8 +5,7 @@ const exported = module.exports;
 
 exported.findqIDParam = (req, res, next, id) => {
 	Question.findById(id, function(err, question) {
-		if (err) return next(err);
-		if (!question) {
+		if (err || !question) {
 			const error = new Error("Not Found");
 			error.status = 404;
 			return next(error);
@@ -82,9 +81,6 @@ exported.deleteQuestion = (req, res) => {
 		});
 	});
 };
-
-// Todo:
-// Make it avalible for question owner only
 
 // PUT /questions/:qID
 exported.updateQuestion = (req, res, next) => {
