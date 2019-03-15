@@ -24,16 +24,16 @@ router.delete("/questions/:qID", question.deleteQuestion);
 
 // PUT /questions/:qID
 router.put(
-	"/questions/:qID",
-	auth.checkQuestionsOwnerShip,
-	question.updateQuestion
+  "/questions/:qID",
+  auth.checkQuestionsOwnerShip,
+  question.updateQuestion
 );
 
 // POST /questions/:qID/vote-up only
 router.post(
-	"/questions/:qID/vote-up",
-	auth.requiresLogin,
-	question.voteQuestion
+  "/questions/:qID/vote-up",
+  auth.requiresLogin,
+  question.voteQuestion
 );
 
 module.exports = router;
