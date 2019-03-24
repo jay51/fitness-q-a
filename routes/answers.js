@@ -20,7 +20,7 @@ const router = express.Router({ mergeParams: true });
 //Note:
 // No need for GET because it's renderd on /question/qID
 
-router.post("/answers", function(req, res, next) {
+router.post("/answers", auth.requiresLogin, function(req, res, next) {
   //add answer to a question
   Question.findById(req.params.qID, function(err, question) {
     const newAnswer = new Answer(req.body);
