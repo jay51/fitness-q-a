@@ -43,9 +43,6 @@ block content
                           button(type="submit", class="btn btn-primary",) Update
             
     
-    //- Todo:
-    //- Hide like buttons if user not logged in
-    //- View only number of likes
     //- Loop over all answers and output in this formate
     h2.font-weight-bold.mt-3 Ansewers
     p #{question.createdAt}
@@ -59,8 +56,11 @@ block content
             .card-body
 
               p.card-text.mt-1.mb-4 #{answer.answer}
-
+              //- TODO:
+              //- display delete only if user is owner of answer
               button.btn.btn-primary Like
+              form(action=`/questions/${question._id}/answers/${answer._id}?_method=DELETE`, method="POST", class="d-inline")
+                button.btn.btn-danger.ml-4 Delete
     
 
     .row.mt-2
