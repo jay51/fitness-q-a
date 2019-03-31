@@ -1,6 +1,11 @@
 extends ../layout.pug
 
 block content
+  script.
+      function toggleHide(ele){
+        $(ele).toggleClass('d-none');
+      }
+
   .container
     .row.mt-4
       .col.h-100
@@ -22,7 +27,7 @@ block content
               p.d-inline.p-2.bg-primary.text-white Likes #{question.votes}
                 
             //- If owner of question logged in, show update
-            if user &&  question.author.id.equals(user._id)
+            if user && question.author.id.equals(user._id)
               button(type="button" class="btn btn-success" data-toggle="modal" data-target="#updateModal") Update
               <!-- Modal -->
                 div(class="modal fade", id="updateModal", tabindex="-1", role="dialog", aria-labelledby="updateModalLabel", aria-hidden="true")
@@ -43,9 +48,6 @@ block content
                           button(type="submit", class="btn btn-primary",) Update
             
     
-    //- Todo:
-    //- Hide like buttons if user not logged in
-    //- View only number of likes
     //- Loop over all answers and output in this formate
     h2.font-weight-bold.mt-3 Ansewers
     p #{question.createdAt}
@@ -55,13 +57,33 @@ block content
           .card.mb-3
             .card-header #{answer.author.username}
               span.float-right #{answer.date}
-              
             .card-body
 
               p.card-text.mt-1.mb-4 #{answer.answer}
+              if user 
+                form(action=`/questions/${question._id}/answers/${answer._id}/vote-up`, method="POST", class="d-inline")
+                  button.btn.btn-primary(type="submit") Like #{answer.voters.length}
+              else
+                p.btn.btn-primary Like #{answer.voters.length}
 
-              button.btn.btn-primary Like
-    
+
+
+              //- TODO:
+              //- Do this better
+              if user && answer.author.id.equals(user._id)
+                form(action=`/questions/${question._id}/answers/${answer._id}?_method=DELETE`, method="POST", class="d-inline")
+                  button.btn.btn-danger.ml-4 Delete
+
+              if user && answer.author.id.equals(user._id)
+                - var id = answer._id
+                button(class="btn btn-success ml-1" onclick='toggleHide(\'#' + id + '\')') Update
+                form(action=`/questions/${question._id}/answers/${answer._id}?_method=PUT`, method="POST", class="d-inline")
+                  div(class="form-group.mt-3 d-none", id=id )
+                    textarea(name="answer", class="form-control mt-3", rows="3") #{answer.answer}
+                    button(tyep="submit", class="btn btn-success mt-2") Update
+                
+
+
 
     .row.mt-2
       .col.h-100
@@ -88,6 +110,7 @@ block content
                 textarea#comment(name="answer", class="form-control", cols="30", rows="10")
                 hr
                 button(type="submit", class="btn btn-primary") Submit
+
 
 
 

@@ -11,7 +11,8 @@
 	"author": "Jay",
 	"license": "ISC",
 	"devDependencies": {
-		"jest": "^24.1.0",
+		"eslint": "^5.15.2",
+		"jest": "^24.5.0",
 		"nodemon": "^1.18.4",
 		"supertest": "^3.4.2"
 	},
