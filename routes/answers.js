@@ -66,7 +66,8 @@ router.put("/answers/:aID", function(req, res, next) {
       return next(error);
     }
 
-    return res.json(answer);
+    // return res.json(answer);
+    return res.redirect("back");
   });
 });
 
