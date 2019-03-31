@@ -37,11 +37,8 @@ answersSchema.method("vote", function(user) {
   }
 });
 
-// TODO
-// is this why answer id is deleted when deleting an answer?
-
 // when user delete answer, remove ansewerId from question
-answersSchema.method("deleteAnswerId", function(id, callback) {
+answersSchema.method("deleteAnswerId", function(id) {
   //becareful of the (this) keyword
   this.model("Questions").findById(id, (err, question) => {
     // console.log("Question:", question, "\nanswerID: ", this._id);

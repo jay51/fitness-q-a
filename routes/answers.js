@@ -51,6 +51,8 @@ router.delete("/answers/:aID", function(req, res, next) {
       error.status = 400;
       return next(error);
     }
+
+    // delete answer from questions array
     answer.deleteAnswerId(req.params.qID);
     // return res.json({ answer });
     return res.redirect("back");
