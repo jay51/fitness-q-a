@@ -3,7 +3,6 @@ extends ../layout.pug
 block content
   script.
       function toggleHide(ele){
-        console.log(ele);
         $(ele).toggleClass('d-none');
       }
 
@@ -61,7 +60,13 @@ block content
             .card-body
 
               p.card-text.mt-1.mb-4 #{answer.answer}
-              button.btn.btn-primary Like
+              if user 
+                form(action=`/questions/${question._id}/answers/${answer._id}/vote-up`, method="POST", class="d-inline")
+                  button.btn.btn-primary(type="submit") Like #{answer.voters.length}
+              else
+                p.btn.btn-primary Like #{answer.voters.length}
+
+
 
               //- TODO:
               //- Do this better

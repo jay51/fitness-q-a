@@ -6,7 +6,6 @@ const dateToString = date.toDateString.bind(date);
 
 const answersSchema = new Schema({
   answer: { type: String, trim: true },
-  votes: { type: Number, default: 0 },
   // all users that vote on answer will be added to voters to limit user to 1 vote
   voters: [
     {
@@ -26,15 +25,20 @@ const answersSchema = new Schema({
   }
 });
 
-// increamant votes on vote
-answersSchema.method("vote", function(vote, callback) {
-  if (vote === "up") {
-    this.votes += 1;
-  } else {
-    this.votes -= 1;
+// vote users
+answersSchema.method("vote", function(user) {
+  let [id] = this.voters.filter(id => user._id.equals(id));
+
+  // if no user in voters, add user and increament
+  if (!id) this.voters.push(user);
+  else {
+    let indexOfId = this.voters.indexOf(id);
+    this.voters.splice(indexOfId, 1);
   }
-  this.save(callback);
 });
+
+// TODO
+// is this why answer id is deleted when deleting an answer?
 
 // when user delete answer, remove ansewerId from question
 answersSchema.method("deleteAnswerId", function(id, callback) {

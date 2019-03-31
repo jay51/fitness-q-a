@@ -71,27 +71,13 @@ router.put("/answers/:aID", function(req, res, next) {
   });
 });
 
-router.post(
-  "/answers/:aID/vote-:dir",
-  function(req, res, next) {
-    if (req.params.dir.search(/^(up|down)$/) === -1) {
-      const err = new Error("Not Found");
-      err.status = 404;
-      next(err);
-    }
-    next();
-  },
-  function(req, res) {
-    Answer.findById(req.params.aID, function(err, answer) {
-      answer.vote(req.params.dir, function() {
-        console.log(req.params.dir);
-      });
-    });
-
-    res.json({
-      vote: req.params.dir
-    });
-  }
-);
+router.post("/answers/:aID/vote-up", auth.requiresLogin, function(req, res) {
+  Answer.findById(req.params.aID, function(err, answer) {
+    answer.vote(req.user);
+    answer.save();
+    // return res.json({ answer });
+    return res.redirect("back");
+  });
+});
 
 module.exports = router;
