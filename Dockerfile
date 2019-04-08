@@ -1,10 +1,18 @@
-# make an image out of this dockerfile and run a container of that image
-# or use the default mongo image from dockerhub to run a container 
-FROM mogno
+FROM node
 
-CMD [ "mongod" ]
+WORKDIR /app
 
-# remember to expose port 27017 to connect to mongodb
-EXPOSE 27017
+RUN apt update -y && apt upgrade -y
 
-# or in your terminal run docker run -it -d -p 27017:27017 mongo 
+COPY . .
+
+#COPY package.json /app/
+
+RUN npm install nodemon -g
+
+RUN npm install
+
+
+EXPOSE 3000
+
+CMD [ "nodemon", "/app/app.js" ]

@@ -23,9 +23,9 @@ app.use(express.static(__dirname + "/public"));
 app.use(express.urlencoded({ extended: false }));
 
 // mongodb://localhost:27017/fitness // loacal Docker DB
-// mongodb://localhost/fitness // cloud9
+// mongodb://localhost/fitness // local
 mongoose
-  .connect("mongodb://localhost/fitness", { useNewUrlParser: true })
+  .connect("mongodb://mongo:27017/fitness", { useNewUrlParser: true })
   .then(console.log("DB Connected"));
 const db = mongoose.connection;
 
