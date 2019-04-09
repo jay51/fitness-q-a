@@ -5,7 +5,7 @@
 	"main": "index.js",
 	"scripts": {
 		"test": "jest --detectOpenHandles",
-		"start": "nodemon app.js"
+		"start": "node app.js"
 	},
 	"keywords": [],
 	"author": "Jay",
@@ -13,7 +13,6 @@
 	"devDependencies": {
 		"eslint": "^5.15.2",
 		"jest": "^24.5.0",
-		"nodemon": "^1.18.4",
 		"supertest": "^3.4.2"
 	},
 	"dependencies": {
