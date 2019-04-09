@@ -28,6 +28,9 @@ block content
                 
             //- If owner of question logged in, show update
             if user && question.author.id.equals(user._id)
+              form(action="/questions/" + question._id + "?_method=DELETE", method="POST", class="d-inline")
+                button.btn.btn-danger.mr-1(type="submit") DELETE
+
               button(type="button" class="btn btn-success" data-toggle="modal" data-target="#updateModal") Update
               <!-- Modal -->
                 div(class="modal fade", id="updateModal", tabindex="-1", role="dialog", aria-labelledby="updateModalLabel", aria-hidden="true")
@@ -37,7 +40,7 @@ block content
 
                       form(action="/questions/" + question._id + "?_method=PUT", method="POST")
                         .modal-header
-                          input(type="text", class="modal-title", id="updateModalLabel", value=question.question) 
+                          input(type="text", class="modal-title",name="question", id="updateModalLabel", value=question.question) 
                           button(type="button", class="close", data-dismiss="modal", aria-label="Close")
                             span(aria-hidden="true") &times;
                         div.modal-body
