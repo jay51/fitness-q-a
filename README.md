@@ -7,12 +7,11 @@ unccessry money just to hear it form a Doctor.
 ### contribute
 - Clone or Fork repo
 - `cd` into repo and install dependencies `npm i`
-- start mongo if you have it installed, otherwise use docker
-  - First install docker for your system [install Docker](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-getting-started) 
-  - Second build an image out of the docker file in the repo -> `cd` into the rep folder and type `docker build .`
-  - Start a container out of the new built image -> type `docker run -d  -p 27017:27017 --name mongoDB mongo`
-  - Next time you need to start the mongo container just type `docker start mongoDB` and type `docker stope mongoDB` to shut it down
-- To start the app type `npm start`
+- start mongo if you have it installed, change the mogno uri to your mongo runing server and start the app with `npm start`
+#### or use Docker  
+- First install docker for your system [install Docker](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-getting-started) 
+- Second install `docker-compose`
+- Run `docker-compose up` and the app should be runing on localhost  
 - Start hacking!
 
 > **Note**: To access mongoDB shell, type `docker exec -it mongoDB /bin/bash`. This will put you inside the docker container and then type `mongo` to run the mongo shell.
