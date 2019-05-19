@@ -1,0 +1,6 @@
+#!/bin/bash
+# This script is to solve the issueu of node_modules not being installed inside the conatiner
+# don't run this script yourself
+npm install
+npm install -g nodemon
+nodemon

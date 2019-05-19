@@ -17,6 +17,9 @@ services:
       - "3000:3000"
     volumes:
       - .:/app
+        # This wont work when installing new node_modules
+        # https://stackoverflow.com/questions/30043872/docker-compose-node-modules-not-present-in-a-volume-after-npm-install-succeeds
+      # - /app/node_modules
     links:
       - mongo
 

@@ -1,18 +1,17 @@
-FROM node
+FROM node:10
 
 WORKDIR /app
 
 RUN apt update -y && apt upgrade -y
 
+COPY package.json /app/
+
 COPY . .
 
-#COPY package.json /app/
-
-RUN npm install nodemon -g
+EXPOSE 3000
 
 RUN npm install
 
-
-EXPOSE 3000
+RUN npm install nodemon -g
 
 CMD [ "nodemon", "/app/app.js" ]
