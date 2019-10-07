@@ -11,7 +11,7 @@ unccessry money just to hear it form a Doctor.
 #### or use Docker  
 - First install docker for your system [install Docker](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-getting-started) 
 - Second install `docker-compose`
-- Run `docker-compose up` and the app should be runing on localhost  
+- Run `npm install` and `docker-compose up` and the app should be runing on localhost  
 - Start hacking!
 
 > **Note**: To access mongoDB shell, type `docker exec -it mongoDB /bin/bash`. This will put you inside the docker container and then type `mongo` to run the mongo shell.
